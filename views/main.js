@@ -30,8 +30,9 @@ window.addEventListener('DOMContentLoaded', async () => {
                 }
 
                 const updatedquantity = parseInt(response.data[i].quantity - inputvalue)
-
+                
                 li[i].textContent = '[ Product=' + response.data[i].product + '] [Description=' + response.data[i].description + '] [Price=' + response.data[i].price + '] [Quantity=' + updatedquantity + ']'
+
 
                 updateProduct(productId, {
                     product: response.data[i].product,
@@ -51,8 +52,11 @@ window.addEventListener('DOMContentLoaded', async () => {
 async function updateProduct(productId, updatedData) {
     try {
       const response = await axios.put(`http://localhost:1010/endpoint/${productId}`, updatedData);
-      console.log(response);
-    //   reloaddata()
+    //   console.log(response.data);
+    //   reloaddata(updatedData)
+    // setTimeout(() => {
+    //     location.reload();
+    //   }, 0)
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +67,7 @@ async function updateProduct(productId, updatedData) {
 function reloaddata(obj) {
 
     const parentelem = document.getElementById('lists')
+
     const childelem = document.createElement('li')
     childelem.className = 'newlist'
     childelem.textContent = '[ Product=' + obj.product + '] [Description=' + obj.description + '] [Price=' + obj.price + '] [Quantity=' + parseInt(obj.quantity) + ']'

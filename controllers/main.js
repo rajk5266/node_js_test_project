@@ -41,14 +41,13 @@ exports.addproduct = async (req, res) =>{
 
 exports.updatequantity = async (req, res) =>{
     const id = req.params.productId
-    const{ product, description, price, quantity} = req.body
     const updatedquantity = req.body.quantity
 
     try{
         const product = await shop.findByPk(id)
         product.quantity = updatedquantity
         await product.save()
-        res.json(id,product, )
+        res.send(id)
     }
     catch(err){
         console.log(err)
